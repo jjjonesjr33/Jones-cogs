@@ -1,0 +1,30 @@
+{
+    "author": [
+        "Jamie Jones"
+    ],
+    "description": "A cog to automatically assign and remove the 'Supporters' role based on other roles.",
+    "disabled": false,
+    "end_user_data_statement": "This cog does not persistently store end user data.",
+    "hidden": false,
+    "install_msg": "The cog is now installed. It will automatically assign or remove the 'Supporters' role based on specified roles.",
+    "max_bot_version": "0.0.0",
+    "min_bot_version": "3.5.0",
+    "min_python_version": [
+        3,
+        9,
+        0
+    ],
+    "name": "SupportersRole",
+    "permissions": [
+        "manage_roles"
+    ],
+    "required_cogs": {},
+    "requirements": [],
+    "short": "Automatic Supporters Role Assignment",
+    "tags": [
+        "roles",
+        "supporters",
+        "automation"
+    ],
+    "type": "COG"
+}
