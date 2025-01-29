@@ -24,6 +24,9 @@ class SupportersRole(commands.Cog):
         ]
         self.check_supporters_task.start()
 
+        # This channel ID will be used to send notifications when roles are updated.
+        self.notification_channel_id = 656095174384025630  # Change this to the channel you want the notifications in
+
     def cog_unload(self):
         self.check_supporters_task.cancel()
 
@@ -34,6 +37,20 @@ class SupportersRole(commands.Cog):
         if not supporter_role:
             return  # The "Supporters" role does not exist
 
+        # Check if the user has been added or removed from any supporter roles
+        before_roles = before.roles
+        after_roles = after.roles
+
+        added_roles = [role for role in after_roles if role not in before_roles]
+        removed_roles = [role for role in before_roles if role not in after_roles]
+
+        # If the supporter role is added or removed, send the notification
+        if supporter_role in added_roles:
+            await self.notify_role_change(after, "added")
+        elif supporter_role in removed_roles:
+            await self.notify_role_change(after, "removed")
+
+        # Regular logic for the Supporters role
         has_supporter_role = supporter_role in after.roles
         has_required_role = any(role.id in self.supporter_roles_ids for role in after.roles)
 
@@ -68,6 +85,15 @@ class SupportersRole(commands.Cog):
                 await member.add_roles(supporter_role, reason="User gained a supporter role.")
             elif not has_required_role and has_supporter_role:
                 await member.remove_roles(supporter_role, reason="User lost all supporter roles.")
+
+    async def notify_role_change(self, member: discord.Member, action: str):
+        """Notify when a user is added or removed from a role in the specified channel."""
+        # Get the notification channel
+        channel = self.bot.get_channel(self.notification_channel_id)
+        if channel:
+            action_str = "added to" if action == "added" else "removed from"
+            message = f"{member.mention} has been {action_str} the role: {self.supporter_role_id}"
+            await channel.send(message)
 
 async def setup(bot):
     await bot.add_cog(SupportersRole(bot))
