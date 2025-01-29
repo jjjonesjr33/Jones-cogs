@@ -92,7 +92,12 @@ class SupportersRole(commands.Cog):
         channel = self.bot.get_channel(self.notification_channel_id)
         if channel:
             action_str = "added to" if action == "added" else "removed from"
-            message = f"{member.mention} has been {action_str} the role: {self.supporter_role_id}"
+            
+            # Get the name of the role
+            role_name = member.guild.get_role(self.supporter_role_id).name
+            
+            # Send the message with the role name
+            message = f"{member.mention} has been {action_str} the role: {role_name}"
             await channel.send(message)
 
 async def setup(bot):
