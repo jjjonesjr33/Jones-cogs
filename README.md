@@ -1,5 +1,5 @@
 
-# SupportersRole Cog
+# Supporters Role Cog
 
 A Redbot cog that manages the assignment and removal of a "Supporters" role based on a set of predefined roles. This cog automatically adds or removes the "Supporters" role for users who gain or lose specific supporter roles, and it can notify a specified channel when these changes occur.
 
@@ -15,7 +15,7 @@ A Redbot cog that manages the assignment and removal of a "Supporters" role base
 1. Clone or download this repository to your Redbot cogs directory:
 
    ```bash
-   git clone https://github.com/yourusername/SupportersRole.git
+   git clone https://github.com/jjjonesjr33/Jones-cogs.git
    ```
 
 2. Install the cog by loading it in your Redbot:
@@ -23,7 +23,7 @@ A Redbot cog that manages the assignment and removal of a "Supporters" role base
    In Discord, run the following command:
 
    ```bash
-   [p]load SupportersRole
+   [p]load supporters
    ```
 
 3. Ensure you have set the channel ID for role change notifications by editing the cog's code. Look for this line and replace `123456789012345678` with the actual channel ID:
